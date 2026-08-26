@@ -51,6 +51,7 @@ export function navegacao() {
   `
   <a href="empresa.html" class="empresa">Empresa</a>
   <a href="clientes.html" class="clientes">Clientes</a>
+  <a href="config.html" class="config">Config.</a>
   `
 }
 

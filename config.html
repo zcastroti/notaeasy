@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota Easy</title>    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="conteudo">
+        <p class="nomeUsuario"><i class="fa-solid fa-user"></i></p>
+
+        <div class="btnsConfig ">
+            <button class="btnEncerrarSessao">Encerrar Sessão <i class="fa-solid fa-right-from-bracket"></i></button>
+            <button class="btnAtualizarDados">Atualizar Dados <i class="fa-solid fa-user-pen"></i></button>        </div>
+    </main>
+
+    <style>
+        .nomeUsuario {
+            margin: 0px auto;
+            margin-top: 10px ;
+            padding: 40px;
+            background: #cee2f7;
+            box-shadow: 6px 7px 1px #0000000d;
+            border-radius: 40% 60% 65% 35% / 40% 35% 65% 60%; }
+
+        .btnsConfig {
+            display: flex; flex-flow: row; gap: 20px; 
+            max-width: 500px; margin: 0px auto;
+            padding-top: 10px;
+        }
+
+        .btnsConfig button { 
+            padding: 30px 20px;
+        }
+
+        @media screen and (max-width: 550px) {
+            .btnsConfig { flex-flow: column;  }
+        }
+    </style>
+
+    <script type="module" src="config.js"></script>
+    <script src="https://kit.fontawesome.com/ac3bdc8044.js" crossorigin="anonymous"></script>
+</body>
+</html>
+

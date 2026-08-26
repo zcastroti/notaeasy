@@ -19,7 +19,7 @@ html, body {
 a { 
     cursor: pointer;
     text-decoration: none; 
-    color: #678DB2; }
+    color: #6980ab; }
 
 b { font-weight: 500; }
 
@@ -31,7 +31,7 @@ nav {
     position: fixed;
     width: 100%;
     height: 60px;
-    background: #9faabf;
+    background: #6980ab;
     padding-left: 20px; }
 
 nav a { 
@@ -55,9 +55,9 @@ main {
     padding-top: 75px;
     height: 100vh; }
 
-/*--------------------
-    Input e Botão
---------------------*/
+/*--------------------------
+    Input - Select - Botão
+----------------------------*/
 input,
 select,
 button {
@@ -65,13 +65,13 @@ button {
     height: 35px; 
     border-radius: 5px; }
 
-input { 
+input {
+    color: #6980ab;
     padding: 0px 5px;
     border: solid 1px #cccccc; }
 input:hover {
     transition: 2s;
     border: solid 1px #555; }
-
 
 select { border: solid 1px #cccccc; }
 
@@ -86,13 +86,8 @@ button:hover {
     transition: .5s;
     background: #cccccc; }
 
+label { font-size: 15px;  }
 
-.grid5 {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
 
 /*--------------------
     Tabela

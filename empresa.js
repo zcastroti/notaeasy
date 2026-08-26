@@ -42,37 +42,40 @@ btnSalvar.onclick = async ()=> {
 
     loop()
     await setDoc(empresaREF, dadosEmpresa, { merge: true })
-    removeLoop()
+    
     alerta(`Dados da empresa salvo com sucesso!`)
   
-  } catch (error) {
-    alerta(`Erro ao salvar dados da empresa <br> ${error}`)
-  }
+  } 
+  catch (error) { alerta(`Erro ao salvar dados da empresa <br> ${error}`) }
+  finally { removeLoop() }
 }
 
 // -- Carregar Dados da Empresa
 carregarDadosEmpresa()
 async function carregarDadosEmpresa() {
-  loop()
-  let empresaREF = doc(db, 'usuarios', USUARIO, 'dadosEmpresa', '1')
+  try {
+    loop()
+    let empresaREF = doc(db, 'usuarios', USUARIO, 'dadosEmpresa', '1')
 
-  let docSnap = await getDoc(empresaREF)
-  
-  if (docSnap.exists()) {
-    let dados = docSnap.data()
+    let docSnap = await getDoc(empresaREF)
 
-    document.querySelector('.razaoSocial').value = dados.razaoSocial || '';
-    document.querySelector('.nomeFantasia').value = dados.nomeFantasia || '';
-    document.querySelector('.cnpj').value = dados.cnpj || '';
-    document.querySelector('.inscricaoMunicipal').value = dados.inscricaoMunicipal || '';
-    document.querySelector('.email').value = dados.email || '';
-    document.querySelector('.telefone').value = dados.telefone || '';
-    document.querySelector('.cep').value = dados.cep || '';
-    document.querySelector('.logradouro').value = dados.logradouro || '';
-    document.querySelector('.numero').value = dados.numero || '';
-    document.querySelector('.bairro').value = dados.bairro || '';
-    document.querySelector('.codigoMunicipio').value = dados.codigoMunicipio || '';
-    document.querySelector('.uf').value = dados.uf || '';
+    if (docSnap.exists()) {
+      let dados = docSnap.data()
+
+      document.querySelector('.razaoSocial').value = dados.razaoSocial || '';
+      document.querySelector('.nomeFantasia').value = dados.nomeFantasia || '';
+      document.querySelector('.cnpj').value = dados.cnpj || '';
+      document.querySelector('.inscricaoMunicipal').value = dados.inscricaoMunicipal || '';
+      document.querySelector('.email').value = dados.email || '';
+      document.querySelector('.telefone').value = dados.telefone || '';
+      document.querySelector('.cep').value = dados.cep || '';
+      document.querySelector('.logradouro').value = dados.logradouro || '';
+      document.querySelector('.numero').value = dados.numero || '';
+      document.querySelector('.bairro').value = dados.bairro || '';
+      document.querySelector('.codigoMunicipio').value = dados.codigoMunicipio || '';
+      document.querySelector('.uf').value = dados.uf || '';
+    }
   }
-  removeLoop()
+  catch (error) { alerta(`Erro ao carregar dados da empresa <br> ${error}`) }
+  finally { removeLoop() }
 }
