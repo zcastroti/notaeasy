@@ -45,7 +45,7 @@ async function login() {
       await updateDoc(docSnap.ref, { ultimoAcesso: dataAtual })
       removeLoop()
 
-      localStorage.setItem('usuario', usuario.id)
+      localStorage.setItem('usuarioNotaEasy', usuario.id)
       window.location.href = 'empresa.html'
     } else { alerta('Usuário não encontrado ou senha incorreta!') }
   }

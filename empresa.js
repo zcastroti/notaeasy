@@ -17,7 +17,7 @@ import { navegacao , gerarIdentificador , modal , alerta , loop, removeLoop, pag
 navegacao()
 document.querySelector('.empresa')?.classList.add('destaque')
 
-const USUARIO = localStorage.getItem('usuario')
+const USUARIO = localStorage.getItem('usuarioNotaEasy')
 
 // -- Salvar Dados da Empresa
 let btnSalvar = document.querySelector('.btnSalvar')

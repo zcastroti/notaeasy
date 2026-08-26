@@ -16,7 +16,7 @@ import { navegacao, gerarIdentificador, modal, alerta, loop, removeLoop, paginar
 navegacao()
 document.querySelector('.config')?.classList.add('destaque')
 
-const USUARIO = localStorage.getItem('usuario')
+const USUARIO = localStorage.getItem('usuarioNotaEasy')
 
 let usuarioREF = doc(db, "usuarios", USUARIO)
 let docSnap = await getDoc(usuarioREF)

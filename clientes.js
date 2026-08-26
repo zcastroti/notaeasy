@@ -16,7 +16,7 @@ import { navegacao, gerarIdentificador, modal, alerta, loop, removeLoop, paginar
 navegacao()
 document.querySelector('.clientes')?.classList.add('destaque')
 
-const USUARIO = localStorage.getItem('usuario')
+const USUARIO = localStorage.getItem('usuarioNotaEasy')
 
 // -- Elemento Botão Novo Cliente
 let btnNovoCliente = document.querySelector('.btnNovoCliente')
