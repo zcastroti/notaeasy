@@ -12,6 +12,7 @@
         <div style=" display: flex; gap: 10px; ">
             <button class="btnNovoCliente">Novo Cliente <i class="fa-solid fa-user-plus"></i></button>
             <button class="btnImportar">Importar Excel <i class="fa-regular fa-file-excel"></i></button>
+            <input type="file" class="inputArquivoExcel" accept=".xlsx, .xls, .csv" style="display: none;">        
         </div>
 
         <div class="tabela-container">
@@ -55,7 +56,8 @@
         }
 
     </style>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script type="module" src="clientes.js"></script>
     <script src="https://kit.fontawesome.com/ac3bdc8044.js" crossorigin="anonymous"></script>
 </body>

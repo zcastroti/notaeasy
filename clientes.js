@@ -18,6 +18,89 @@ document.querySelector('.clientes')?.classList.add('destaque')
 
 const USUARIO = localStorage.getItem('usuarioNotaEasy')
 
+
+// -- Importar Excel
+let btnImportar = document.querySelector('.btnImportar')
+let inputArquivoExcel = document.querySelector('.inputArquivoExcel')
+
+btnImportar.onclick = () => {
+  inputArquivoExcel.click()
+}
+
+inputArquivoExcel.onchange = (evento) => {
+  let arquivo = evento.target.files[0]
+  if (!arquivo) return
+
+  let leitor = new FileReader()
+
+  leitor.onload = async function (e) {
+    try {
+      let dadosBinarios = e.target.result
+      let workbook = XLSX.read(dadosBinarios, { type: 'binary' })
+      
+      // Pega a primeira aba da planilha
+      let nomeAba = workbook.SheetNames[0]
+      let planilha = workbook.Sheets[nomeAba]
+      
+      // Converte a planilha em uma matriz (linhas e colunas)
+      let linhas = XLSX.utils.sheet_to_json(planilha, { header: 1 })
+
+      if (linhas.length <= 1) {
+        alerta('A planilha está vazia ou com formato inválido.')
+        return
+      }
+
+      loop()
+      let importadosCount = 0
+
+      // Começa do índice 1 para ignorar a linha 0 (cabeçalho)
+      for (let i = 1; i < linhas.length; i++) {
+        let colunas = linhas[i]
+        
+        // Se a linha estiver totalmente vazia, pula
+        if (!colunas || colunas.length === 0) continue
+
+        let dadosCliente = {
+          nome: colunas[0] ? String(colunas[0]).trim() : '',
+          cnpj: colunas[1] ? String(colunas[1]).trim() : '',
+          inscricaoMunicipal: colunas[2] ? String(colunas[2]).trim() : '',
+          email: colunas[3] ? String(colunas[3]).trim() : '',
+          telefone: colunas[4] ? String(colunas[4]).trim() : '',
+          cep: colunas[5] ? String(colunas[5]).trim() : '',
+          logradouro: colunas[6] ? String(colunas[6]).trim() : '',
+          numero: colunas[7] ? String(colunas[7]).trim() : '',
+          bairro: colunas[8] ? String(colunas[8]).trim() : ''
+        }
+
+        // Se tiver nome, salva no Firebase
+        if (dadosCliente.nome) {
+          let idFinal = gerarIdentificador()
+          let clienteRef = doc(db, 'usuarios', USUARIO, 'clientes', idFinal)
+          await setDoc(clienteRef, dadosCliente)
+          importadosCount++
+        }
+      }
+
+      alerta(`${importadosCount} clientes importados com sucesso!`)
+      carregarClientes() // Atualiza a tabela na tela
+    } catch (error) {
+      console.error('Erro na importação do Excel:', error)
+      alerta('Erro ao ler o arquivo do Excel.')
+    } finally {
+      removeLoop()
+      inputArquivoExcel.value = '' // Limpa o input
+    }
+  }
+
+  // Lê o arquivo como binário para o SheetJS processar
+  leitor.readAsBinaryString(arquivo)
+}
+
+
+
+
+
+
 // -- Elemento Botão Novo Cliente
 let btnNovoCliente = document.querySelector('.btnNovoCliente')
 btnNovoCliente.onclick = ()=> abrirModalCliente()
@@ -118,6 +201,7 @@ function abrirModalCliente(clienteId = null, dados = {}) {
 }
 
 // -- Carregar Clientes na Tabela
+carregarClientes()
 async function carregarClientes() {
   loop()
   try {
@@ -174,7 +258,7 @@ function abrirModalEnvioNota(clienteId, cliente) {
   let bodyModal = document.querySelector('.bodyModal')
   bodyModal.innerHTML = `
     <div style="display: flex; flex-direction: column; gap: 10px;">
-        <p><b>E-mail de destino:</b> ${cliente.email || 'Não informado'}</p>
+        <p><b>e-Mail de destino:</b> ${cliente.email || 'Não informado'}</p>
         <div>
             <label>Valor do Serviço</label>
             <input type="text" class="valorNota" placeholder="0,00">
@@ -231,4 +315,3 @@ function abrirModalEnvioNota(clienteId, cliente) {
   }
 }
 
-carregarClientes()
