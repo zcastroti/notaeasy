@@ -8,7 +8,8 @@
 </head>
 <body>
     <main class="conteudo">
-        <div style="display: flex; gap: 10px;">
+        <!-- Botão  ❝Novo Cliente❞ e  ❝Importar Excel❞ -->
+        <div style=" display: flex; gap: 10px; ">
             <button class="btnNovoCliente">Novo Cliente <i class="fa-solid fa-user-plus"></i></button>
             <button class="btnImportar">Importar Excel <i class="fa-regular fa-file-excel"></i></button>
         </div>
@@ -17,15 +18,17 @@
             <table class="tabelaClientes">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Documento</th>
+                        <th class="col-nome">Nome</th>
+                        <th class="col-documento">Documento</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Os dados serão injetados via JavaScript -->
+                    <!--Dados injetados via JavaScript -->
                 </tbody>
             </table>
+
+            <!-- Botões de Paginação -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
                 <button class="btnVoltar">Voltar</button>
                 <span class="nomePagina">Página 1 de 1</span>
@@ -35,7 +38,22 @@
     </main>
 
     <style>
-        tbody td { border: none; }
+        tbody td { 
+            padding: 8px;
+            background: white;
+            border: none; }
+
+        .col-nome { 
+            max-width: 210px; 
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media screen and (max-width: 450px) {
+            .col-documento { display: none; }
+        }
+
     </style>
 
     <script type="module" src="clientes.js"></script>
