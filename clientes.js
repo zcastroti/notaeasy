@@ -176,14 +176,16 @@ function abrirModalEnvioNota(clienteId, cliente) {
     <div style="display: flex; flex-direction: column; gap: 10px;">
         <p><b>E-mail de destino:</b> ${cliente.email || 'Não informado'}</p>
         <div>
-            <label>Valor do Serviço (R$)</label>
+            <label>Valor do Serviço</label>
             <input type="text" class="valorNota" placeholder="0,00">
         </div>
         <div>
-            <label>Descrição do Serviço / Histórico</label>
+            <label>Descrição do Serviço</label>
             <input type="text" class="descricaoNota" value="Serviços de Informática">
         </div>
-        <button class="btnConfirmarEnvio" style="margin-top: 10px;">Emitir e Enviar Nota <i class="fa-solid fa-file-invoice-dollar"></i></button>
+        <div style=" display: flex; gap: 10px; ">
+          <button class="btnConfirmarEnvio" style="margin-top: 10px;">Emitir e Enviar Nota <i class="fa-solid fa-file-invoice-dollar"></i></button>
+        </div>
     </div>
   `
 
