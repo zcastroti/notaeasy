@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotaEasy</title>    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="conteudo">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1></h1>
+            <button class="btnNovoCliente">Novo Cliente <i class="fa-solid fa-user-plus"></i></button>
+        </div>
+
+        <div class="tabela-container">
+            <table class="tabelaClientes">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Documento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os dados serão injetados via JavaScript -->
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                <button class="btnVoltar">Voltar</button>
+                <span class="nomePagina">Página 1 de 1</span>
+                <button class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        tbody td { border: none; }
+    </style>
+
+    <script type="module" src="clientes.js"></script>
+    <script src="https://kit.fontawesome.com/ac3bdc8044.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotaEasy</title>    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="conteudo">
+        
+        <form class="grid10 dadosEmpresa">
+            <div class="div-razao">
+                <label for="razaoSocial">Razão Social</label>
+                <input type="text" class="razaoSocial">
+            </div>
+            <div class="div-fantasia">
+                <label for="nomeFantasia">Nome Fantasia</label>
+                <input type="text" class="nomeFantasia">
+            </div>
+            <div class="div-cnpj">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" class="cnpj">
+            </div>
+            <div class="div-im">
+                <label for="inscricaoMunicipal">Inscrição Municipal</label>
+                <input type="text" class="inscricaoMunicipal">
+            </div>
+            <div class="div-email">
+                <label for="email">e-Mail</label>
+                <input type="text" class="email">
+            </div>
+            <div class="div-telefone">
+                <label for="telefone">Telefone</label>
+                <input type="text" class="telefone">
+            </div>
+            <div class="div-cep">
+                <label for="cep">CEP</label>
+                <input type="text" class="cep">
+            </div>
+            <div class="div-logradouro">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="logradouro">
+            </div>
+            <div class="div-numero">
+                <label for="numero">Número</label>
+                <input type="text" class="numero">
+            </div>
+            <div class="div-bairro">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="bairro">
+            </div>
+            <div class="div-codigoMunicipio">
+                <label for="codigoMunicipio">Código do Municipio</label>
+                <input type="text" class="codigoMunicipio" value="5002704">
+            </div>
+            <div class="div-uf">
+                <label for="uf">UF</label>
+                <input type="text" class="uf" value="MS" maxlength="2">
+            </div>
+        </form>
+
+        <div style=" margin-top: 10px; display: flex; gap: 10px; ">
+            <button class="btnSalvar">Salvar <i class="fa-solid fa-circle-check"></i></button>
+        </div>
+
+    </main>
+
+    <style>
+        .div-razao { grid-column: span 10; }
+        .div-fantasia { grid-column: span 10; }
+        .div-cnpj { grid-column: span 5; }
+        .div-im { grid-column: span 5; }
+        .div-email { grid-column: span 5; }
+        .div-telefone { grid-column: span 5; }
+        .div-cep { grid-column: span 3; }
+        .div-logradouro { grid-column: span 7; }
+        .div-numero { grid-column: span 2; }
+        .div-bairro { grid-column: span 8; }
+        .div-codigoMunicipio { grid-column: span 5; }
+        .div-uf { grid-column: span 5; }
+    </style>
+
+    <script type="module" src="empresa.js"></script>
+    <script src="https://kit.fontawesome.com/ac3bdc8044.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
