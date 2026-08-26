@@ -99,22 +99,37 @@ label { font-size: 15px;  }
 table {
     width: 100%;
     border-collapse: collapse;
-    border: solid 1px black;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e2e2;
 }
 
 th { 
     color: white;
-    padding: 5px 2px;
+    padding: 12px 10px;
     background: #6980ab;
-    border: solid 1px black; }
+    font-weight: 500;
+    text-align: left;
+}
 
+td { 
+    padding: 10px;
+    color: #282828;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+/* Efeito Zebrado nas Linhas */
 tbody tr:nth-child(even) {
     background-color: #f8fafc;
 }
 
-td { 
-    padding: 5px 2px;
-    border: solid 1px black; }
+/* Efeito ao passar o mouse */
+tbody tr:hover {
+    transition: background 0.2s ease;
+    background-color: #0000000e;
+}
 
 /*--------------------
     Alerta
@@ -128,6 +143,7 @@ td {
     padding: 20px;
     max-width: 300px;
     border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     background: #cee2f7; }
 
 /*--------------------
