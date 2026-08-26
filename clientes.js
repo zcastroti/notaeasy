@@ -95,11 +95,106 @@ inputArquivoExcel.onchange = (evento) => {
 }
 
 
-// -- Elemento Botão Novo Cliente
-let btnNovoCliente = document.querySelector('.btnNovoCliente')
-btnNovoCliente.onclick = ()=> abrirModalCliente()
+// -- Cadastrar Cliente
+document.querySelector('.btnNovoCliente').onclick = ()=> cadastrarCliente()
+function cadastrarCliente() {
+  modal('Novo Cliente', 650)
+
+  let bodyModal = document.querySelector('.bodyModal')
+  bodyModal.innerHTML = 
+  `
+  <form class="grid10 dadosCliente">
+      <div class="div-nome">
+          <label for="nome">Nome/Razão Social</label>
+          <input type="text" class="nome">
+      </div>
+      <div class="div-cnpj">
+          <label for="cnpj">CPF/CNPJ</label>
+          <input type="text" class="cnpj">
+      </div>
+      <div class="div-im">
+          <label for="inscricaoMunicipal">RG/Inscrição Municipal</label>
+          <input type="text" class="inscricaoMunicipal" >
+      </div>
+      <div class="div-email">
+          <label for="email">e-Mail</label>
+          <input type="text" class="email">
+      </div>
+      <div class="div-telefone">
+          <label for="telefone">Telefone</label>
+          <input type="text" class="telefone">
+      </div>
+      <div class="div-cep">
+          <label for="cep">CEP</label>
+          <input type="text" class="cep">
+      </div>
+      <div class="div-logradouro">
+          <label for="logradouro">Logradouro</label>
+          <input type="text" class="logradouro">
+      </div>
+      <div class="div-numero">
+          <label for="numero">Número</label>
+          <input type="text" class="numero">
+      </div>
+      <div class="div-bairro">
+          <label for="bairro">Bairro</label>
+          <input type="text" class="bairro">
+      </div>
+  </form>
+
+  <div style="margin-top: 10px; display: flex; gap: 10px;">
+      <button class="btnSalvarCliente">Salvar <i class="fa-solid fa-circle-check"></i></button>
+  </div>
+
+  <style>
+      .div-nome { grid-column: span 10; }
+      .div-cnpj { grid-column: span 5; }
+      .div-im { grid-column: span 5; }
+      .div-email { grid-column: span 5; }
+      .div-telefone { grid-column: span 5; }
+      .div-cep { grid-column: span 3; }
+      .div-logradouro { grid-column: span 7; }
+      .div-numero { grid-column: span 2; }
+      .div-bairro { grid-column: span 8; }
+  </style>
+  `
+
+  document.querySelector('.btnSalvarCliente').onclick = async () => {
+    let dadosCliente = {
+      nome: document.querySelector('.bodyModal .nome').value,
+      cnpj: document.querySelector('.bodyModal .cnpj').value,
+      inscricaoMunicipal: document.querySelector('.bodyModal .inscricaoMunicipal').value,
+      email: document.querySelector('.bodyModal .email').value,
+      telefone: document.querySelector('.bodyModal .telefone').value,
+      cep: document.querySelector('.bodyModal .cep').value,
+      logradouro: document.querySelector('.bodyModal .logradouro').value,
+      numero: document.querySelector('.bodyModal .numero').value,
+      bairro: document.querySelector('.bodyModal .bairro').value
+    }
+
+    if (!dadosCliente.nome) {
+      alerta('O campo Nome / Razão Social é obrigatório!')
+      return
+    }
+
+    let id = gerarIdentificador()
+    let clienteRef = doc(db, 'usuarios', USUARIO, 'clientes', id)
+
+    loop()
+    try {
+      await setDoc(clienteRef, dadosCliente, { merge: true })
+      alerta('Cliente salvo com sucesso!')
+      document.querySelector('.overlay')?.remove()
+      carregarClientes()
+    } catch (error) { alerta('Erro ao salvar cliente.')
+    } finally { removeLoop() }
+  }
+}
+
+
 
 // -- Função para Abrir o Modal de Cadastro/Edição de Cliente
+/*
 function abrirModalCliente(clienteId = null, dados = {}) {
   modal(clienteId ? 'Editar Cliente' : 'Novo Cliente', 650)
 
@@ -193,6 +288,7 @@ function abrirModalCliente(clienteId = null, dados = {}) {
     } finally { removeLoop() }
   }
 }
+*/
 
 // -- Carregar Clientes na Tabela
 carregarClientes()
@@ -245,7 +341,7 @@ async function carregarClientes() {
   }
 }
 
-// -- Função para o Modal e Envio de Nota integrado ao Back-end
+// -- Envio de Nota Fiscal
 function abrirModalEnvioNota(clienteId, cliente) {
   modal(`Enviar Nota`, 500)
 
