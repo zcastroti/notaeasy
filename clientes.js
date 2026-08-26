@@ -23,9 +23,7 @@ const USUARIO = localStorage.getItem('usuarioNotaEasy')
 let btnImportar = document.querySelector('.btnImportar')
 let inputArquivoExcel = document.querySelector('.inputArquivoExcel')
 
-btnImportar.onclick = () => {
-  inputArquivoExcel.click()
-}
+btnImportar.onclick = () => { inputArquivoExcel.click() }
 
 inputArquivoExcel.onchange = (evento) => {
   let arquivo = evento.target.files[0]
@@ -95,10 +93,6 @@ inputArquivoExcel.onchange = (evento) => {
   // Lê o arquivo como binário para o SheetJS processar
   leitor.readAsBinaryString(arquivo)
 }
-
-
-
-
 
 
 // -- Elemento Botão Novo Cliente
@@ -243,7 +237,7 @@ async function carregarClientes() {
       tbody.appendChild(tr)
     })
 
-    paginarTabela('.tabelaClientes', 5)
+    paginarTabela('.tabelaClientes', 7)
   } catch (error) {
     alerta('Erro ao carregar clientes.')
   } finally {
