@@ -22,9 +22,7 @@ const USUARIO = localStorage.getItem('usuarioNotaEasy')
 // -- Importar Excel
 let btnImportar = document.querySelector('.btnImportar')
 let inputArquivoExcel = document.querySelector('.inputArquivoExcel')
-
 btnImportar.onclick = () => { inputArquivoExcel.click() }
-
 inputArquivoExcel.onchange = (evento) => {
   let arquivo = evento.target.files[0]
   if (!arquivo) return
@@ -98,7 +96,7 @@ inputArquivoExcel.onchange = (evento) => {
 // -- Cadastrar Cliente
 document.querySelector('.btnNovoCliente').onclick = ()=> cadastrarCliente()
 function cadastrarCliente() {
-  modal('Novo Cliente', 650)
+  modal('Novo Cliente')
 
   let bodyModal = document.querySelector('.bodyModal')
   bodyModal.innerHTML = 
@@ -192,7 +190,8 @@ function cadastrarCliente() {
 }
 
 
-
+// -- Editar Cliente
+document.querySelectorAll('.btnEditarCliente').onclick = ()=> editarCliente()
 // -- Função para Abrir o Modal de Cadastro/Edição de Cliente
 /*
 function abrirModalCliente(clienteId = null, dados = {}) {
@@ -315,13 +314,13 @@ async function carregarClientes() {
         <td class="col-nome">${dados.nome || ''}</td>
         <td class="col-documento" style=" color: #6980ab; font-size: 14px; ">${dados.cnpj || ''}</td>
         <td style="text-align: center; display: flex; gap: 10px; justify-content: center;">
-          <button class="btnEditar" title="Editar" style="padding: 5px 8px;"><i class="fa-solid fa-pen"></i></button>
+          <button class="btnEditarCliente" title="Editar" style="padding: 5px 8px;"><i class="fa-solid fa-pen"></i></button>
           <button class="btnEnviar" title="Enviar Nota" style="padding: 5px 8px; background: #cee2f7;"><i class="fa-solid fa-paper-plane"></i></button>
         </td>
       `
 
       // Evento de Editar
-      tr.querySelector('.btnEditar').onclick = () => {
+      tr.querySelector('.btnEditarCliente').onclick = () => {
         abrirModalCliente(docSnap.id, dados)
       }
 

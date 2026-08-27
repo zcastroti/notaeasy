@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NotaEasy</title>    
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 </head>
 <body>
     <main class="conteudo">
@@ -30,7 +31,7 @@
             </table>
 
             <!-- Botões de Paginação -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+            <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px; ">
                 <button class="btnVoltar">Voltar</button>
                 <span class="nomePagina">Página 1 de 1</span>
                 <button class="btnAvancar">Avançar</button>
@@ -53,6 +54,7 @@
 
         @media screen and (max-width: 450px) {
             .col-documento { display: none; }
+            .btnEnviar { display: none; }
         }
 
     </style>
