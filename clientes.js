@@ -94,7 +94,7 @@ inputArquivoExcel.onchange = (evento) => {
 
 
 // -- Cadastrar Cliente
-document.querySelector('.btnNovoCliente').onclick = ()=> cadastrarCliente()
+document.querySelector('.btnNovoCliente').onclick = ()=> abrirModalCliente()
 function cadastrarCliente() {
   modal('Novo Cliente')
 
@@ -191,9 +191,8 @@ function cadastrarCliente() {
 
 
 // -- Editar Cliente
-document.querySelectorAll('.btnEditarCliente').onclick = ()=> editarCliente()
-// -- Função para Abrir o Modal de Cadastro/Edição de Cliente
-/*
+document.querySelectorAll('.btnEditarCliente').onclick = ()=> abrirModalCliente()
+
 function abrirModalCliente(clienteId = null, dados = {}) {
   modal(clienteId ? 'Editar Cliente' : 'Novo Cliente', 650)
 
@@ -287,7 +286,7 @@ function abrirModalCliente(clienteId = null, dados = {}) {
     } finally { removeLoop() }
   }
 }
-*/
+
 
 // -- Carregar Clientes na Tabela
 carregarClientes()
@@ -315,6 +314,7 @@ async function carregarClientes() {
         <td class="col-documento" style=" color: #6980ab; font-size: 14px; ">${dados.cnpj || ''}</td>
         <td style="text-align: center; display: flex; gap: 10px; justify-content: center;">
           <button class="btnEditarCliente" title="Editar" style="padding: 5px 8px;"><i class="fa-solid fa-pen"></i></button>
+          <button class="btnDeletar" title="Deletar" style="padding: 5px 8px; background: #f7cece;"><i class="fa-solid fa-trash"></i></button>
           <button class="btnEnviar" title="Enviar Nota" style="padding: 5px 8px; background: #cee2f7;"><i class="fa-solid fa-paper-plane"></i></button>
         </td>
       `
@@ -322,6 +322,11 @@ async function carregarClientes() {
       // Evento de Editar
       tr.querySelector('.btnEditarCliente').onclick = () => {
         abrirModalCliente(docSnap.id, dados)
+      }
+
+      // Evento de Deletar 
+      tr.querySelector('.btnDeletar').onclick = () => {
+        deletar(docSnap.id , dados.nome)
       }
 
       // Evento de Enviar Nota (fluxo de notas)
@@ -339,6 +344,40 @@ async function carregarClientes() {
     removeLoop()
   }
 }
+
+// -- Deletar
+function deletar(id , nomeCliente) {
+  modal('Deletar Cliente' , 400)
+  document.querySelector('.bodyModal').innerHTML =
+  `
+  <p style="text-align: center;">Deseja realmente deletar este cliente?</p>
+  <b style="text-align: center;">${nomeCliente}</b>
+  <br>
+  <div style="display: flex; gap: 10px; justify-content: center;">
+      <button class="btnCancelar">Cancelar <i class="fa-regular fa-circle-xmark"></i></button>
+      <button class="btnConfirmar">Confirmar <i class="fa-solid fa-circle-check"></i></button>
+  </div>
+  `
+
+  // Cancelar
+  document.querySelector('.btnCancelar').onclick = ()=> {
+    document.querySelector('.overlay')?.remove()
+    document.querySelector('.modal')?.remove()
+  }
+
+  // Confirmar
+  document.querySelector('.btnConfirmar').onclick = async ()=> {
+    document.querySelector('.overlay')?.remove()
+    document.querySelector('.modal')?.remove()
+    let clienteRef = doc(db, 'usuarios', USUARIO, 'clientes', id)
+    loop()
+    await deleteDoc(clienteRef)
+    removeLoop()
+    carregarClientes()
+  }
+
+}
+
 
 // -- Envio de Nota Fiscal
 function abrirModalEnvioNota(clienteId, cliente) {
